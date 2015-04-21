@@ -1,7 +1,7 @@
 CodeIgniter-Report
 ========================================
 
-My CodeIgniter Report is a librairie class to use in your CodeIgniter v2.2.x applications. It provides a solution to store and retrieve/display your error or information messages whenever you want. This librairie is multilangue ready, messages are cleared just when you retrieve them (remain available even after a redirect), purpose different type of storage (session CI, flashdata CI, array PHP), purpose templates (Twitter Bootstrap 3 ready) or make your own, display time or not, additionnel store in CI log or not, and to finnish: fast use!
+My CodeIgniter Report is a librairie class to use in your CodeIgniter v2.2.x & v3.0 applications. It provides a solution to store and retrieve/display your error or information messages whenever you want. This librairie is multilangue ready, messages are cleared just when you retrieve them (remain available even after a redirect), purpose different type of storage (session CI, flashdata CI, array PHP), purpose templates (Twitter Bootstrap 3 ready) or make your own, display time or not, additionnel store in CI log or not, and to finnish: fast use!
 
 Synopsis
 --------
