@@ -1,11 +1,13 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
 /**
  * A librairie for CodeIgniter with manage error/report message, using
  * session or flashdata, stock into file logs
  *
+ * @author Cédric Ruiu
  * @link http://github.com/Cedric-ruiu/CodeIgniter-Report
- * @copyright Copyright (c) 2015, Cédric Ruiu <http://opla-studio.com>
- * @version v1.2
+ * @version v2
  */
 
 class Report
@@ -18,7 +20,7 @@ class Report
     /**
      * Enable display time on report view.
      */
-    protected $time       = FALSE;
+    protected $time = FALSE;
 
     /**
      * The current request's view.
@@ -28,7 +30,7 @@ class Report
     /**
      * The temporary storage method of reports. Option available : session | flashdata | stack_array
      */
-    protected $save_type  = 'session';
+    protected $save_type = 'session';
 
     /**
      * Reports are automatically clean after load for read. Functional only with session mode.
@@ -38,7 +40,7 @@ class Report
     /**
      * Save report in CI log file.
      */
-    protected $log        = FALSE;
+    protected $log = FALSE;
 
     /**
      * Reports librarie use 4 types of message provide from twitter bootstrap model: error, success, warning and notice.
@@ -91,18 +93,6 @@ class Report
     {
         $this->CI =& get_instance();
         $this->refresh_operations_methods();
-        $this->set_template($this->template_default);
-    }
-
-    protected function check_template($template_to_check)
-    {
-        $template_path_file = APPPATH.'libraries/report/templates/'.$template_to_check.'.php';
-        if(file_exists($template_path_file))
-        {
-            include_once($template_to_check);
-            return TRUE;
-        }
-        else exit('Impossible to load Report template '.$template_to_check);
     }
 
     protected function refresh_operations_methods()
@@ -231,15 +221,10 @@ class Report
     /**
      * Public function
      */
-    
+
     public function set_template($my_template)
     {
-        if($this->check_template($my_template))
-        {
-            $t_name = 'Report_'.str_replace('-', '_', $my_template);
-            $this->template = new $t_name;
-            return $this;
-        }
+        $this->template_default = $my_template;
     }
 
     public function save_type($tmp_save_type)
@@ -305,11 +290,11 @@ class Report
 
             foreach($reports as $key => $report)
             {
-                $time    = ($this->time)? date($this->CI->config->item('log_date_format'), $report[1]): NULL;
-                $code    = $this->template->types[$report[0]];
-                $message = (isset($report[2])) ? $report[2] : $this->get_default_message($code);
+                $report_datas['time']    = ($this->time)? date($this->CI->config->item('log_date_format'), $report[1]): NULL;
+                $report_datas['code']    = $report[0];
+                $report_datas['message'] = (isset($report[2])) ? $report[2] : $this->get_default_message($report[0]);
 
-                $report_view .= $this->template->get_template($code, $message, $time);
+                $report_view .= $this->CI->load->view('report/'.$this->template_default, $report_datas, TRUE);
             }
 
             return $report_view;
@@ -317,7 +302,3 @@ class Report
         return '';
     }
 }
-
-
-/* End of file Report.php */
-/* Location: ./application/libraries/report/Report.php */

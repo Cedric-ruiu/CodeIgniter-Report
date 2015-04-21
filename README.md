@@ -1,7 +1,7 @@
 CodeIgniter-Report
 ========================================
 
-My CodeIgniter Report is a librairie class to use in your CodeIgniter v2.2.x applications. It provides a solution to store and retrieve/display your error or information messages whenever you want. This librairie is multilangue ready, messages are cleared just when you retrieve them (remain available even after a redirect), purpose different type of storage (session CI, flashdata CI, array PHP), purpose templates (Twitter Bootstrap 3 ready) or make your own, display time or not, additionnel store in CI log or not, and to finnish : fast use!
+My CodeIgniter Report is a librairie class to use in your CodeIgniter v2.2.x applications. It provides a solution to store and retrieve/display your error or information messages whenever you want. This librairie is multilangue ready, messages are cleared just when you retrieve them (remain available even after a redirect), purpose different type of storage (session CI, flashdata CI, array PHP), purpose templates (Twitter Bootstrap 3 ready) or make your own, display time or not, additionnel store in CI log or not, and to finnish: fast use!
 
 Synopsis
 --------
@@ -28,24 +28,27 @@ $this->report->set('3', 'Good info: Use your brain, but not forget your heart');
 echo $this->report->with_time()->set_template('yes-i-can-use-my-template')->get_all();
 ```
 
-Installation/Usage
-------------------
+Installation
+------------
 
-1. Download project and  CodeIgniter will load and initialise this class automatically for you.
-2. Drag folder _report_ file into your _application/librairies_ folder.
-3. Drag files you need into _language_ folder into your(s) language(s) folder(s).
+Ok, basic steps for Codeigniter newbies
+
+1. Download project.
+2. Drag files from folder project into your CodeIgniter application
+3. You can load librarie manually in your controller: `$this->load->library('Report');` OR load automatically in your config/autoload.php: `$autoload['libraries'] = array('Report');`.
+4. That's all! It's just a small library!
 
 Storage
 -------
 
 ###Type of message###
 
-4 types of message can be stored : success, error, warning, info. You can use one of these markers to indicate which message you want :
+4 types of message can be stored: success, error, warning, info. You can use one of these markers to indicate which message you want:
 
-* error code  : `0`, `'0'`, `FALSE`
+* error code:   `0`, `'0'`, `FALSE`
 * success code: `1`, `'1'`, `TRUE`
 * warning code: `2`, `'2'`
-* notice code : `3`, `'3'`
+* notice code:  `3`, `'3'`
 
 ###Way to store###
 
@@ -57,23 +60,23 @@ or
 ```php
 $this->report->set = array(TRUE, 'You`re the best...');
 ```
-or if you just want to use default message (see multi-language) :
+or if you just want to use default message (see multi-language):
 ```php
 $this->report->set = TRUE;
 ```
 
 ###Engine store###
 You have the choice for type of store your data:
-* `session` : use the CI Session to store the data. So you can reload set many messages and relaod page before print them!
-* `falshdata` ! use the CI Flashdata.
-* `stack_array` : Report librairie make an array PHP. Be careful because you're array of datas will be cleaned if you reload page.
+* `session`: use the CI Session to store the data. So you can reload set many messages and relaod page before print them!
+* `flashdata`: use the CI Flashdata.
+* `stack_array`: Report librairie make an array PHP. Be careful because you're array of datas will be cleaned if you reload page.
 
 ```php
-protected $save_type  = 'session';
+protected $save_type = 'session';
 ```
 
 ###CI Log###
-If you want you can in parallel save message in CI Log. That's easy if you want that, just change the default variable :
+If you want you can in parallel save message in CI Log. That's easy if you want that, just change the default variable:
 ```php
 protected $log = FALSE; // default
 ```
@@ -101,7 +104,7 @@ protected $auto_clean = TRUE;
 
 Template
 --------
-In folder `report/templates/` you will find different template to display your messages. For the moment you have just choice between Twitter bootstrap 2 or 3. If you want you can write your own template and set the default variable with the name of folder that you created:
+In folder `views/report/` you will find different template to display your messages. For the moment you have just choice between Twitter bootstrap 2 or 3. If you want you can write your own template and set the default variable with the name of folder that you created:
 ```php
 protected $template_default = 'my-awesome-template';
 ```
@@ -119,7 +122,7 @@ For your multilanguage application, you can use `report_lang.php` in the correct
 $lang['report_error']   = '...';
 $lang['report_success'] = '...';
 $lang['report_warning'] = '...';
-$lang['report_info']  = '...';
+$lang['report_info']    = '...';
 ```
 At the moment, just french and english version are writed.
 
@@ -141,6 +144,12 @@ protected $time = FALSE;
 
 Changelog
 ---------
+
+**Version 2.0 (21/04/2015)**
+* CI3 compatible
+* New template engine, move into views folder. It's more flexible, more pretty, and less code
+* Language slug refactoring
+* Several fixing
 
 **Version 1.2 (30/01/2015)**
 * Add template change method and push project to GitHub
