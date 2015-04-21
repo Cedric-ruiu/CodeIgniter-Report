@@ -119,10 +119,14 @@ Language
 
 For your multilanguage application, you can use `report_lang.php` in the correct folder to fill the four default messages:
 ```php
-$lang['report_error']   = '...';
-$lang['report_success'] = '...';
-$lang['report_warning'] = '...';
-$lang['report_info']    = '...';
+// error
+$lang['report_0'] = '...';
+// success
+$lang['report_1'] = '...';
+// warning
+$lang['report_2'] = '...';
+// info
+$lang['report_3'] = '...';
 ```
 At the moment, just french and english version are writed.
 
